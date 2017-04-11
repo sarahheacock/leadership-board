@@ -1,0 +1,138 @@
+//https://fcctop100.herokuapp.com/api/fccusers/top/recent
+//https://fcctop100.herokuapp.com/api/fccusers/top/alltime
+// var cols = [{key: 'username', label: 'Username'}, {key: 'recent', label: 'Recent Score'}, {key: 'overall', label: 'Overall Score'}];
+
+
+
+var TopList = React.createClass({
+  
+  getInitialState: function(){
+    return {winner: []};
+  },
+  
+  componentDidMount: function() { 
+    var url = 'https://fcctop100.herokuapp.com/api/fccusers/top/recent';
+    this.update(url);   
+  },
+  
+  handleChange: function(){
+    // var self = this;
+    var url = this.state.winner[100].url;
+    console.log(url);
+    var nurl = '';
+    if(url === "https://fcctop100.herokuapp.com/api/fccusers/top/alltime"){  
+      nurl = 'https://fcctop100.herokuapp.com/api/fccusers/top/recent';
+    }
+    else {
+      nurl = 'https://fcctop100.herokuapp.com/api/fccusers/top/alltime';
+    }  
+    
+    this.update(nurl);
+  },
+  
+  //componentWillReceiveProps: function(url){
+  update: function(url){
+    //console.log('hi');
+    var self = this;
+    $.getJSON(url, function(result){
+      //array of objects
+      var user = result.map(function(p){
+        return {
+          username: p["username"],
+          img: p["img"],
+          recent: p["recent"],
+          alltime: p["alltime"]
+        };
+      });
+      user.push({url: url});
+      
+        $(self.getDOMNode()).fadeOut(700, function(){
+          self.setState({winner: user}); 
+          $(self.getDOMNode()).fadeIn(700);
+        });
+      
+    });
+  }, 
+  
+      
+  render: function() {
+    console.log("hi");
+    //console.log(this.state.winner[100].url);
+    return <div>
+      <Button onClick={this.handleChange} text={this.state.winner} />
+      <Table user={this.state.winner} />
+    </div>;
+  }
+});
+    
+var Button = React.createClass({
+  newtext: function(y){
+    //y = y.toString()
+    return y.map(function(t){
+      if(t.url === "https://fcctop100.herokuapp.com/api/fccusers/top/alltime"){
+        return "Get Top Scores From Last 30 Days"
+      }
+      if(t.url === 'https://fcctop100.herokuapp.com/api/fccusers/top/recent'){
+        return "Get All-Time Top Scores"
+      }
+    });
+  },
+  
+  render: function(){
+    return <div className="text-center">
+    <button onClick={this.props.onClick}>{this.newtext(this.props.text)}</button>
+    </div>;
+  }
+});
+
+
+var Table = React.createClass({
+  
+  generateRows: function(x){
+    //var cols = this.props.cols;
+    //var data = ;
+    var count = 0;
+    return x.map(function(item){
+      // var cells = cols.map(function(colData){
+      //   return<td id={colData.key}>{item[colData.key]}</td>
+      // });
+      // return <tr>{cells}</tr>;
+      count++;
+      if(count < 101){
+        return<tr key={item.username}>
+          <td><b>{count}</b></td>
+          <td><img src={item.img}/>{item.username}</td>
+          <td>{item.recent}</td>
+          <td>{item.alltime}</td>
+        </tr>;
+      }
+    });
+  },
+  
+  render: function(){
+    var goodStuff = <div><table>
+          <thead>
+            <tr>
+              <th>Ranking</th>
+              <th>Username</th>
+              <th>Recent</th>
+              <th>AllTime</th>
+            </tr>
+          </thead>
+          <tbody>{this.generateRows(this.props.user)}</tbody>
+        </table></div>
+    //console.log(goodStuff);    
+    return goodStuff;
+    
+  }  
+});
+
+// var HelloWorld = React.createClass({
+//     render: function() {
+//         return <div>Hello, world!</div>;
+//     }
+// });
+
+// ReactDOM.render(<HelloWorld />,document.getElementById('container'));
+
+ReactDOM.render(<TopList />,document.getElementById('container'));

@@ -1,0 +1,111 @@
+.container-fluid{
+  padding: 0px;
+  margin: 0px;
+  background-color: WhiteSmoke;
+  font-family: Georgia, serif;  
+  color: DimGray;
+}
+
+.area{
+  background-color: White;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 50px;
+  max-width:1200px;
+  padding-bottom: 1%;
+}
+
+h1{
+  color: #218868;
+  padding-top: 4%;
+  padding-bottom: 1%;
+  font-size: 450%;
+}
+
+
+
+table {
+/*   border: 1px solid black; */
+  padding: 7%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table, th, td {
+   border: 1px solid White;
+}
+
+th{
+  background-color: #218868;
+  color: WhiteSmoke;
+  padding: 1%;
+  margin: 1%;
+  
+}
+
+tr:nth-child(even) {background-color: #f2f2f2}
+tr:nth-child(odd) {background-color: White}
+
+tr:hover {
+  background-color: Gainsboro;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+td {
+  padding-left: 2%;
+}
+
+img {
+  width:10%;
+  position: static;
+  display: inline-block;
+  border-color: White;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 50%;
+  float: left;
+  
+}
+
+button{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2%;
+  font-size: 20px;
+  position: static;
+  display: inline-block;
+  border-color: #218868;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 30%;
+  margin: 2%;
+  font-family: Georgia, serif;
+  background-color: WhiteSmoke;
+  color: DimGray;
+}
+
+button:hover {
+  background-color: Gainsboro;
+  color: CornflowerBlue;
+}
+
+
+.fa-heart{
+  color: #CD8C95;
+}
+
+.fa-coffee{
+  color: #CDC0B0;
+}
+footer{
+  background-color: #218868;
+  color: WhiteSmoke;
+  padding: 0.5%;
+  text-align: center;
+  font-size: 15px;
+  font-style: italic;
+ 
+  bottom: 0px;
+  width:100%;
+  opacity: 0.8;
+}
